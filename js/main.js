@@ -53,11 +53,14 @@ let rotatorIndex = 0;
 function cycleRotator(){
   rotatorIndex = (rotatorIndex + 1) % rotatorWords.length;
   rotatorEl.style.opacity = '0';
-  setTimeout(() => {
-    rotatorEl.textContent = rotatorWords[rotatorIndex];
-    rotatorEl.style.opacity = '1';
-  }, 280);
 }
+
+rotatorEl.addEventListener('transitionend', (e) => {
+  if (e.propertyName !== 'opacity' || rotatorEl.style.opacity !== '0') return;
+  rotatorEl.textContent = rotatorWords[rotatorIndex];
+  rotatorEl.style.opacity = '1';
+});
+
 rotatorEl.style.transition = 'opacity .28s ease';
 setInterval(cycleRotator, 2800);
 
