@@ -153,6 +153,7 @@ button{ font-family: inherit; cursor: pointer; }
 .rotator{
   display:flex; align-items:center; justify-content:center; min-height: 2.3em;
   background: var(--gradient); -webkit-background-clip:text; background-clip:text; color:transparent;
+  will-change: opacity; -webkit-transform: translateZ(0); transform: translateZ(0);
 }
 .hero-sub{ font-size:1.15rem; max-width:640px; margin: 0 auto 2rem; }
 .hero-actions{ display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:3.5rem; }

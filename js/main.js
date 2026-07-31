@@ -58,7 +58,11 @@ function cycleRotator(){
 rotatorEl.addEventListener('transitionend', (e) => {
   if (e.propertyName !== 'opacity' || rotatorEl.style.opacity !== '0') return;
   rotatorEl.textContent = rotatorWords[rotatorIndex];
-  rotatorEl.style.opacity = '1';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      rotatorEl.style.opacity = '1';
+    });
+  });
 });
 
 rotatorEl.style.transition = 'opacity .28s ease';
