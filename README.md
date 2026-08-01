@@ -28,28 +28,34 @@ npx serve .
 
 then visit the printed local URL.
 
-## Contact form setup (Formspree)
+## Contact form setup (Web3Forms)
 
-The contact form currently points to a placeholder Formspree endpoint:
+The contact form currently points to Web3Forms' shared endpoint with a placeholder
+access key:
 
 ```
-https://formspree.io/f/YOUR_FORM_ID
+access_key = "YOUR_ACCESS_KEY"
 ```
 
 To make it live:
 
-1. Go to [formspree.io](https://formspree.io) and sign up (free tier: 50 submissions/month).
-2. Create a new form and set the notification email to `davis.nettech@gmail.com`.
-3. Copy the form ID Formspree gives you (looks like `xayzabcd`).
-4. In `index.html`, find the `<form id="contactForm" ...>` tag and replace
-   `YOUR_FORM_ID` in the `action` attribute with your real form ID.
-5. Submit a test message from the live site once and confirm it in Formspree's
-   dashboard (first submission from a new form usually requires a one-time
-   confirmation click).
+1. Go to [web3forms.com](https://web3forms.com) and enter `davis.nettech@gmail.com`
+   to get a free access key (free tier: 250 submissions/month, no account/dashboard
+   needed — the key is emailed to you immediately).
+2. In `index.html`, find the `<form id="contactForm" ...>` tag and replace
+   `YOUR_ACCESS_KEY` in the hidden `access_key` input's `value` with your real key.
+3. Submit a test message from the live site once and confirm it arrives by email.
 
-The form includes a honeypot field (`_gotcha`) for basic spam filtering and sets
+The form includes a honeypot field (`botcheck`) for basic spam filtering and sets
 the reply-to address to whatever the visitor enters, so replying to the
 notification email goes straight to them.
+
+To also route submissions to a second person (e.g. a business partner) without
+paying for Web3Forms' Pro CC-email feature, set up a Gmail filter instead:
+**Settings → Filters and Blocked Addresses → Create a new filter**, matching
+`subject:("New inquiry from IntegralAI website")`, with the action **Forward to**
+their (pre-verified) email address. This only forwards form submissions, not your
+whole inbox.
 
 ## Demos
 

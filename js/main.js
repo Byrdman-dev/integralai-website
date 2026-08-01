@@ -109,12 +109,13 @@ demoTabs.forEach(tab => {
 const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 const contactSubmit = document.getElementById('contactSubmit');
+const accessKeyInput = contactForm.querySelector('input[name="access_key"]');
 
 contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  if (contactForm.action.includes('YOUR_FORM_ID')) {
-    formStatus.textContent = 'Contact form is not fully set up yet — Formspree form ID is missing.';
+  if (accessKeyInput.value === 'YOUR_ACCESS_KEY') {
+    formStatus.textContent = 'Contact form is not fully set up yet — Web3Forms access key is missing.';
     formStatus.className = 'form-status error';
     return;
   }
@@ -124,13 +125,15 @@ contactForm.addEventListener('submit', async (e) => {
   formStatus.className = 'form-status';
 
   try {
+    const payload = Object.fromEntries(new FormData(contactForm));
     const response = await fetch(contactForm.action, {
       method: 'POST',
-      body: new FormData(contactForm),
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
     });
+    const result = await response.json();
 
-    if (response.ok) {
+    if (response.ok && result.success) {
       formStatus.textContent = "Thanks — your message is on its way. We'll be in touch soon.";
       formStatus.className = 'form-status success';
       contactForm.reset();
