@@ -55,7 +55,7 @@ a{ color: inherit; text-decoration: none; }
 img,svg{ display:block; max-width:100%; }
 button{ font-family: inherit; cursor: pointer; }
 
-.container{ width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+.container{ width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 24px; }
 .sr-only{
   position:absolute; width:1px; height:1px; padding:0; margin:-1px;
   overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
@@ -179,7 +179,7 @@ button{ font-family: inherit; cursor: pointer; }
 .section-lede{ max-width: 620px; font-size:1.05rem; }
 
 .grid{ display:grid; gap:1.5rem; margin-top:2.5rem; }
-.services-grid{ grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
+.services-grid{ grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); }
 
 .card{
   background: var(--surface); border:1px solid var(--border); border-radius: var(--radius-md);
