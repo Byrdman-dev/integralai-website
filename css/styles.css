@@ -290,8 +290,6 @@ button{ font-family: inherit; cursor: pointer; }
 
 /* ===================== Contact ===================== */
 .contact-grid{ display:grid; grid-template-columns: .9fr 1.1fr; gap:3rem; align-items:start; }
-.contact-direct{ margin-top:1.5rem; }
-.contact-direct a{ font-family: var(--font-head); font-size:1.15rem; font-weight:600; color: var(--cyan); }
 .contact-form{
   background: var(--surface); border:1px solid var(--border); border-radius: var(--radius-lg);
   padding: 2rem; display:flex; flex-direction:column; gap:1.1rem; box-shadow: var(--shadow-glow);
