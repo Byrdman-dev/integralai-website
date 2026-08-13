@@ -288,6 +288,19 @@ button{ font-family: inherit; cursor: pointer; }
 .value-item h4{ font-family: var(--font-head); margin:0 0 .35rem; font-size:1rem; }
 .value-item p{ margin:0; font-size:.88rem; }
 
+.founders-block{ margin-top: 3rem; }
+.founders-block > .eyebrow{ margin-bottom: 1rem; }
+.founders-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1.25rem; }
+.founder-card{
+  background: var(--surface); border:1px solid var(--border); border-radius: var(--radius-md);
+  padding:1.25rem 1.4rem; transition: transform .3s var(--ease), border-color .3s, background .3s;
+}
+.founder-card:hover{ transform: translateY(-2px); border-color: var(--border-strong); background: var(--surface-strong); }
+.founder-card h4{ font-family: var(--font-head); margin:0 0 .25rem; font-size:1rem; }
+.founder-title{ margin:0 0 .6rem; font-size:.85rem; color: var(--text-secondary); }
+.founder-link{ font-size:.88rem; font-weight:600; color: var(--violet-soft); }
+.founder-link:hover{ color: var(--cyan); }
+
 /* ===================== Contact ===================== */
 .contact-grid{ display:grid; grid-template-columns: .9fr 1.1fr; gap:3rem; align-items:start; }
 .contact-form{
