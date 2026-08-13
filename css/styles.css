@@ -324,6 +324,9 @@ button{ font-family: inherit; cursor: pointer; }
 .footer-nav{ display:flex; gap:1.5rem; flex-wrap:wrap; }
 .footer-nav a{ font-size:.85rem; color: var(--text-secondary); }
 .footer-nav a:hover{ color: var(--text-primary); }
+.footer-social{ display:flex; gap:1rem; }
+.footer-social a{ color: var(--text-secondary); display:flex; }
+.footer-social a:hover{ color: var(--text-primary); }
 .footer-copy{ margin:0; font-size:.8rem; color: var(--text-tertiary); }
 
 .back-to-top{
