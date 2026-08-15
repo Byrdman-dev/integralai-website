@@ -18,6 +18,12 @@ backToTop.addEventListener('click', () => {
 const navToggle = document.getElementById('navToggle');
 const mainNav = document.getElementById('mainNav');
 
+function closeMobileNav(){
+  mainNav.classList.remove('open');
+  navToggle.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
+}
+
 navToggle.addEventListener('click', () => {
   const isOpen = mainNav.classList.toggle('open');
   navToggle.classList.toggle('open', isOpen);
@@ -25,12 +31,12 @@ navToggle.addEventListener('click', () => {
 });
 
 mainNav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mainNav.classList.remove('open');
-    navToggle.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  });
+  link.addEventListener('click', closeMobileNav);
 });
+
+document.addEventListener('scroll', () => {
+  if (mainNav.classList.contains('open')) closeMobileNav();
+}, { passive: true });
 
 // ===================== Scroll reveal =====================
 const revealEls = document.querySelectorAll('.reveal');
