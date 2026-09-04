@@ -148,7 +148,7 @@ button{ font-family: inherit; cursor: pointer; }
 }
 .hero-inner{ text-align:center; max-width: 860px; }
 .eyebrow{
-  display:inline-block; text-transform:uppercase; letter-spacing:.14em; font-size:.75rem; font-weight:700;
+  display:inline-block; text-transform:uppercase; letter-spacing:.14em; font-size:.85rem; font-weight:700;
   color: var(--cyan); margin-bottom:1rem;
 }
 .hero h1{ margin-inline:auto; }
