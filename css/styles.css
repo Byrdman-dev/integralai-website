@@ -188,6 +188,7 @@ button{ font-family: inherit; cursor: pointer; }
 .services-note{ margin-top:2rem; }
 .services-note h4{ font-family: var(--font-head); margin:0 0 .4rem; font-size:1rem; }
 .services-note p{ margin:0; font-size:.92rem; }
+.services-note .founding-offer-note{ margin-top:.75rem; font-size:1.05rem; }
 
 .card{
   background: var(--surface); border:1px solid var(--border); border-radius: var(--radius-md);
