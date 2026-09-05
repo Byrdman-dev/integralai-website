@@ -207,6 +207,13 @@ button{ font-family: inherit; cursor: pointer; }
 .price-main{ display:block; font-weight:700; color: var(--text-primary); font-size:1rem; }
 .price-sub{ display:block; font-size:.92rem; color: var(--text-tertiary); margin-top:.2rem; }
 
+.founding-offer-note{
+  margin-top:.75rem; font-size:1.05rem; font-weight:600; color: var(--violet-soft);
+}
+.founding-offer{
+  margin-top:.75rem; font-size:.98rem; font-weight:600; color: var(--violet-soft);
+}
+
 /* ===================== Client Projects ===================== */
 .projects-grid{ grid-template-columns: repeat(auto-fit, minmax(400px,1fr)); }
 .project-card{
