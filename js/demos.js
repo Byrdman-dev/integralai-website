@@ -1,6 +1,10 @@
 // =========================================================================
 // Shared chat helpers
 // =========================================================================
+const ICON_VOLUME_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+const ICON_VOLUME_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
+const ICON_PHONE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+
 function scrollToBottom(container){
   container.scrollTop = container.scrollHeight;
 }
@@ -166,14 +170,14 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
 
   if (!supportsSpeech){
     speechToggle.disabled = true;
-    speechToggle.textContent = '🔇 Voice unsupported';
+    speechToggle.innerHTML = `${ICON_VOLUME_OFF} Voice unsupported`;
     speechToggle.setAttribute('aria-pressed', 'false');
   }
 
   speechToggle.addEventListener('click', () => {
     voiceOn = !voiceOn;
     speechToggle.setAttribute('aria-pressed', String(voiceOn));
-    speechToggle.textContent = voiceOn ? '🔊 Voice on' : '🔇 Voice off';
+    speechToggle.innerHTML = voiceOn ? `${ICON_VOLUME_ON} Voice on` : `${ICON_VOLUME_OFF} Voice off`;
     if (!voiceOn) window.speechSynthesis.cancel();
   });
 
@@ -187,10 +191,10 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
   }
 
   async function botSay(html, { spoken } = {}){
-    const typingEl = appendTyping(chatWindow, '☎️');
+    const typingEl = appendTyping(chatWindow, ICON_PHONE);
     await wait(500 + Math.random() * 400);
     typingEl.remove();
-    appendMessage(chatWindow, { from: 'bot', avatar: '☎️', html });
+    appendMessage(chatWindow, { from: 'bot', avatar: ICON_PHONE, html });
     speak(spoken || html.replace(/<[^>]+>/g, ''));
   }
 
@@ -301,7 +305,7 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     endBtn.disabled = true;
     callDot.classList.remove('live');
     callStatusText.textContent = 'Not connected';
-    appendMessage(chatWindow, { from: 'bot', avatar: '☎️', html: 'Call ended. Press "Start Call" to try again.' });
+    appendMessage(chatWindow, { from: 'bot', avatar: ICON_PHONE, html: 'Call ended. Press "Start Call" to try again.' });
   }
 
   startBtn.addEventListener('click', startCall);
