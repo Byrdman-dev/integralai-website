@@ -248,9 +248,11 @@ button{ font-family: inherit; cursor: pointer; }
 /* ===================== Demos ===================== */
 .demo-tabs{ display:flex; gap:.75rem; margin: 2.5rem 0 1.5rem; flex-wrap:wrap; }
 .demo-tab{
+  display:inline-flex; align-items:center; gap:.5rem;
   background: var(--surface); border:1px solid var(--border); color: var(--text-secondary);
   padding: .75rem 1.3rem; border-radius: 999px; font-weight:600; font-size:.9rem; transition: all .25s var(--ease);
 }
+.demo-tab svg{ width:18px; height:18px; flex-shrink:0; }
 .demo-tab:hover{ color: var(--text-primary); border-color: var(--border-strong); }
 .demo-tab.active{ background: var(--gradient); color:#05070d; border-color: transparent; }
 
