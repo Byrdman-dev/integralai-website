@@ -203,6 +203,7 @@ button{ font-family: inherit; cursor: pointer; }
   font-size:1.4rem; border-radius: var(--radius-sm); background: var(--gradient-soft);
   border:1px solid var(--border); margin-bottom:1rem;
 }
+.card-icon svg{ width:24px; height:24px; color: var(--violet-soft); }
 .card h3{ margin-bottom:.5rem; }
 .card p{ font-size:.92rem; margin:0; }
 .services-grid .card p{ font-size:1rem; }
