@@ -220,7 +220,7 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 /* ===================== Client Projects ===================== */
-.projects-grid{ grid-template-columns: repeat(auto-fit, minmax(400px,1fr)); }
+.projects-grid{ grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); }
 .project-card{
   display:flex; align-items:flex-start; gap:1.25rem; text-decoration:none;
 }
