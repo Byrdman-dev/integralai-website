@@ -207,14 +207,14 @@ button{ font-family: inherit; cursor: pointer; }
 .card p{ font-size:.92rem; margin:0; }
 .services-grid .card p{ font-size:1rem; }
 .card-price{ margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); }
-.price-main{ display:block; font-weight:700; color: var(--text-primary); font-size:1rem; }
-.price-sub{ display:block; font-size:1.05rem; color: var(--text-tertiary); margin-top:.2rem; }
+.price-main{ display:block; font-weight:700; color: var(--text-primary); font-size:1.2rem; }
+.price-sub{ display:block; font-size:1rem; color: var(--text-primary); margin-top:.2rem; }
 
 .founding-offer-note{
   margin-top:.75rem; font-size:1.05rem; font-weight:600; color: var(--violet-soft);
 }
 .founding-offer{
-  margin-top:.75rem; font-size:.98rem; font-weight:600; color: var(--violet-soft);
+  margin-top:.75rem; font-size:.98rem; font-weight:500; color: var(--violet-soft);
 }
 
 /* ===================== Client Projects ===================== */
