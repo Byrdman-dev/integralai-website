@@ -44,90 +44,89 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
   const input = document.getElementById('ragInput');
   const suggestions = document.getElementById('ragSuggestions');
 
-  const knowledgeBase = [
-    {
-      keywords: ['service', 'offer', 'do you do', 'help with'],
-      answer: 'IntegralAI offers six core services: AI workflow automation, RAG knowledge assistants, AI customer service &amp; voice receptionists, intelligent document processing, custom AI applications, and business system integrations.',
-      source: 'Services'
-    },
-    {
-      keywords: ['start', 'begin', 'process', 'first step', 'kick off'],
-      answer: 'Every project starts with a free strategy and discovery conversation where we learn your workflows and challenges before proposing any solution.',
-      source: 'Process — Step 1'
-    },
-    {
-      keywords: ['small business', 'medium', 'sme', 'size of business', 'small and medium'],
-      answer: "Yes — IntegralAI is built specifically for small and medium-sized businesses. We tailor every solution instead of selling one-size-fits-all AI products.",
-      source: 'About'
-    },
-    {
-      keywords: ['what is rag', 'rag assistant', 'retrieval', 'what does rag mean', 'rag stand for'],
-      answer: 'RAG stands for Retrieval-Augmented Generation — an AI pattern where a system retrieves relevant information from your own documents, then uses that context to generate accurate, grounded answers instead of relying on a general model’s memory alone. This chat is a simplified example of that pattern.',
-      source: 'RAG Knowledge Assistants'
-    },
-    {
-      keywords: ['price', 'cost', 'pricing', 'how much', 'budget'],
-      answer: 'Pricing depends on the scope of the engagement, from a single automation to a full custom application. Book a free consultation and we’ll scope it together.',
-      source: 'Contact'
-    },
-    {
-      keywords: ['receptionist', 'voice', 'phone', 'call', 'customer service'],
-      answer: 'Our AI voice receptionists answer calls, handle FAQs and routine requests 24/7, and route anything that needs a human straight to your team.',
-      source: 'AI Customer Service'
-    },
-    {
-      keywords: ['document', 'invoice', 'paperwork', 'form', 'contract', 'extraction'],
-      answer: 'Intelligent document processing extracts, classifies, and routes information from invoices, forms, and contracts automatically, cutting manual review down to just the exceptions that need it.',
-      source: 'Document Processing'
-    },
-    {
-      keywords: ['integrat', 'existing software', 'crm', 'current tools', 'connect'],
-      answer: 'We integrate directly with the tools you already use — CRMs, scheduling software, help desks, ERPs, and custom internal systems — instead of asking you to replace them.',
-      source: 'Business System Integrations'
-    },
-    {
-      keywords: ['support', 'after launch', 'maintenance', 'ongoing'],
-      answer: 'Support doesn’t stop at deployment. We monitor, refine, and support every solution after launch as your needs evolve.',
-      source: 'Process — Step 5'
-    },
-    {
-      keywords: ['contact', 'reach', 'email', 'get in touch'],
-      answer: 'You can reach IntegralAI directly at davis.nettech@gmail.com or through the contact form on this site.',
-      source: 'Contact'
+  // Similarity is a cosine score in [-1, 1] between the visitor's question
+  // embedding and a knowledge-base entry's precomputed embedding. Below this,
+  // the question is treated as out of scope. Tune here if matches feel too
+  // loose or too strict.
+  const SIMILARITY_THRESHOLD = 0.5;
+
+  const TRANSFORMERS_CDN_URL = 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2';
+  const EMBEDDING_MODEL = 'Xenova/all-MiniLM-L6-v2';
+  const EMBEDDINGS_URL = 'js/data/rag-embeddings.json';
+
+  // Created lazily on first use and reused for the rest of the session —
+  // not initialized on page load. transformers.js caches the model weights
+  // themselves via the browser Cache API by default; we don't touch that.
+  let embedderPromise = null;
+  function getEmbedder(){
+    if (!embedderPromise){
+      embedderPromise = import(TRANSFORMERS_CDN_URL)
+        .then(({ pipeline }) => pipeline('feature-extraction', EMBEDDING_MODEL));
     }
-  ];
+    return embedderPromise;
+  }
 
-  function findAnswer(question){
-    const q = question.toLowerCase();
+  let knowledgeBasePromise = null;
+  function getKnowledgeBase(){
+    if (!knowledgeBasePromise){
+      knowledgeBasePromise = fetch(EMBEDDINGS_URL).then(res => res.json());
+    }
+    return knowledgeBasePromise;
+  }
+
+  // Embeddings on both sides are unit-normalized (see scripts/embed_qa.py and
+  // the { normalize: true } pipeline option below), so cosine similarity is
+  // just the dot product — no magnitude division needed.
+  function cosineSimilarity(a, b){
+    let dot = 0;
+    for (let i = 0; i < a.length; i++) dot += a[i] * b[i];
+    return dot;
+  }
+
+  function findBestMatch(queryEmbedding, knowledgeBase){
     let best = null;
-    let bestScore = 0;
-
+    let bestScore = -Infinity;
     knowledgeBase.forEach(entry => {
-      let score = 0;
-      entry.keywords.forEach(k => { if (q.includes(k)) score += k.split(' ').length; });
+      const score = cosineSimilarity(queryEmbedding, entry.embedding);
       if (score > bestScore){ bestScore = score; best = entry; }
     });
+    return { best, bestScore };
+  }
 
-    if (best) return best;
-    return {
-      answer: "I don't have that in this demo's small FAQ knowledge base — but a real RAG assistant built for your business would search your full documentation and give you a grounded answer with sources, not a guess.",
-      source: 'No match found'
-    };
+  async function findAnswer(question){
+    const embedder = await getEmbedder();
+    const [output, knowledgeBase] = await Promise.all([
+      embedder(question, { pooling: 'mean', normalize: true }),
+      getKnowledgeBase()
+    ]);
+    const queryEmbedding = Array.from(output.data);
+
+    const { best, bestScore } = findBestMatch(queryEmbedding, knowledgeBase);
+    if (best && bestScore >= SIMILARITY_THRESHOLD){
+      return { answer: best.answer, source: best.topic };
+    }
+    return { answer: 'That inquiry is outside my scope.', source: null };
   }
 
   async function handleQuestion(question){
     appendMessage(chatWindow, { from: 'user', avatar: 'You', html: escapeHtml(question) });
-
     suggestions.querySelectorAll('.chip').forEach(c => c.disabled = true);
-    const typingEl = appendTyping(chatWindow, 'AI');
-    await wait(650 + Math.random() * 500);
-    typingEl.remove();
 
-    const { answer, source } = findAnswer(question);
+    const isFirstLoad = !embedderPromise;
+    const statusEl = appendTyping(chatWindow, 'AI');
+    if (isFirstLoad){
+      statusEl.querySelector('.chat-bubble').innerHTML = 'Loading the on-device matching model (first question only)…';
+    }
+
+    const { answer, source } = await findAnswer(question);
+
+    if (!isFirstLoad) await wait(300 + Math.random() * 300);
+    statusEl.remove();
+
     appendMessage(chatWindow, {
       from: 'bot',
       avatar: 'AI',
-      html: `${answer}<span class="source-chip">Source: ${source}</span>`
+      html: source ? `${answer}<span class="source-chip">Source: ${source}</span>` : answer
     });
     suggestions.querySelectorAll('.chip').forEach(c => c.disabled = false);
   }
