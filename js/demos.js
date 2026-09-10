@@ -140,13 +140,86 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     if (!voiceOn) window.speechSynthesis.cancel();
   });
 
+  // Tuned by ear against the browser's default voice — adjust here if a
+  // different voice ends up sounding better at different values.
+  const SPEECH_RATE = 0.97;
+  const SPEECH_PITCH = 1.03;
+  const SENTENCE_PAUSE_MS = 180;
+
+  let selectedVoice = null;
+
+  function pickBestVoice(voices){
+    if (!voices.length) return null;
+    const englishVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+    const pool = englishVoices.length ? englishVoices : voices;
+
+    // Stick to local (on-device) voices only — some browsers also list
+    // remote/cloud voices via speechSynthesis, and using one would mean an
+    // actual network call just to speak, which breaks the "nothing sent
+    // anywhere" claim this demo makes.
+    const localPool = pool.filter(v => v.localService);
+
+    // Prefer local "Natural"/"Neural" voices, e.g. Edge's Microsoft Natural
+    // voices — they sound far less robotic than the classic default ones.
+    const naturalLocal = localPool.find(v => /natural|neural/i.test(v.name));
+    if (naturalLocal) return naturalLocal;
+
+    // Next best: any local voice that isn't just the browser's plain default.
+    const nonDefaultLocal = localPool.find(v => !v.default);
+    if (nonDefaultLocal) return nonDefaultLocal;
+
+    if (localPool.length) return localPool[0];
+
+    // No local voice available at all (rare) — fall back to whatever the
+    // browser offers, same as the original, unmodified behavior.
+    return pool.find(v => v.default) || pool[0] || null;
+  }
+
+  function refreshVoice(){
+    if (!supportsSpeech) return;
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length) selectedVoice = pickBestVoice(voices);
+  }
+
+  if (supportsSpeech){
+    refreshVoice();
+    // getVoices() is often empty until this fires — a well-known Web
+    // Speech API quirk (especially in Chrome), so we can't rely on the
+    // synchronous call above alone.
+    window.speechSynthesis.addEventListener('voiceschanged', refreshVoice);
+  }
+
+  // Splits on sentence-ending punctuation followed by whitespace/end of
+  // string, so long answers speak as separate utterances with a natural
+  // pause between them instead of one flat run-on line.
+  function splitIntoSentences(text){
+    const sentences = text.match(/[^.!?]+[.!?]+(\s|$)/g);
+    if (sentences && sentences.length) return sentences.map(s => s.trim()).filter(Boolean);
+    const trimmed = text.trim();
+    return trimmed ? [trimmed] : [];
+  }
+
+  function speakSentences(sentences, index){
+    if (index >= sentences.length) return;
+    const utterance = new SpeechSynthesisUtterance(sentences[index]);
+    if (selectedVoice) utterance.voice = selectedVoice;
+    utterance.rate = SPEECH_RATE;
+    utterance.pitch = SPEECH_PITCH;
+    utterance.onend = () => {
+      setTimeout(() => speakSentences(sentences, index + 1), SENTENCE_PAUSE_MS);
+    };
+    // Interrupting speak() calls cancel() first, which fires an error (not
+    // end) on the in-flight utterance in most browsers — swallow it so the
+    // chain simply stops instead of continuing to speak after being cut off.
+    utterance.onerror = () => {};
+    window.speechSynthesis.speak(utterance);
+  }
+
   function speak(text){
     if (!supportsSpeech || !voiceOn) return;
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text.replace(/&\w+;/g, ' '));
-    utterance.rate = 1.02;
-    utterance.pitch = 1.0;
-    window.speechSynthesis.speak(utterance);
+    const sentences = splitIntoSentences(text.replace(/&\w+;/g, ' '));
+    speakSentences(sentences, 0);
   }
 
   async function botSay(html, { spoken } = {}){
