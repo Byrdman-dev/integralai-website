@@ -148,30 +148,29 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
 
   let selectedVoice = null;
 
+  function isNaturalVoice(voice){
+    return !!voice && /natural|neural/i.test(voice.name);
+  }
+
   function pickBestVoice(voices){
     if (!voices.length) return null;
     const englishVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
     const pool = englishVoices.length ? englishVoices : voices;
 
-    // Stick to local (on-device) voices only — some browsers also list
-    // remote/cloud voices via speechSynthesis, and using one would mean an
-    // actual network call just to speak, which breaks the "nothing sent
-    // anywhere" claim this demo makes.
-    const localPool = pool.filter(v => v.localService);
+    // Best available: any "Natural"/"Neural" voice, e.g. Edge's Online
+    // Natural voices. These sound far more natural than classic TTS voices,
+    // but the genuinely good-sounding ones are almost always cloud-delivered,
+    // not on-device — picking one here means an actual network call happens
+    // when the receptionist speaks (the caller-matching/embedding pipeline
+    // stays fully local either way; only audio synthesis leaves the device).
+    const natural = pool.find(isNaturalVoice);
+    if (natural) return natural;
 
-    // Prefer local "Natural"/"Neural" voices, e.g. Edge's Microsoft Natural
-    // voices — they sound far less robotic than the classic default ones.
-    const naturalLocal = localPool.find(v => /natural|neural/i.test(v.name));
-    if (naturalLocal) return naturalLocal;
-
-    // Next best: any local voice that isn't just the browser's plain default.
-    const nonDefaultLocal = localPool.find(v => !v.default);
+    // Next best: any local (on-device) voice that isn't the plain default.
+    const nonDefaultLocal = pool.find(v => v.localService && !v.default);
     if (nonDefaultLocal) return nonDefaultLocal;
 
-    if (localPool.length) return localPool[0];
-
-    // No local voice available at all (rare) — fall back to whatever the
-    // browser offers, same as the original, unmodified behavior.
+    // Fall back to whatever the browser defaults to.
     return pool.find(v => v.default) || pool[0] || null;
   }
 
@@ -203,8 +202,12 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     if (index >= sentences.length) return;
     const utterance = new SpeechSynthesisUtterance(sentences[index]);
     if (selectedVoice) utterance.voice = selectedVoice;
-    utterance.rate = SPEECH_RATE;
-    utterance.pitch = SPEECH_PITCH;
+    // Natural/Neural voices already have well-tuned prosody — forcing our
+    // rate/pitch tweak onto them tends to make them sound worse, not better,
+    // so only apply it to the classic, flatter-sounding voices that need it.
+    const useTunedProsody = !isNaturalVoice(selectedVoice);
+    utterance.rate = useTunedProsody ? SPEECH_RATE : 1.0;
+    utterance.pitch = useTunedProsody ? SPEECH_PITCH : 1.0;
     utterance.onend = () => {
       setTimeout(() => speakSentences(sentences, index + 1), SENTENCE_PAUSE_MS);
     };
