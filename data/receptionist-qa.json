@@ -1,0 +1,277 @@
+[
+  {
+    "topic": "Web Services Overview",
+    "question": "What web services do you offer?",
+    "answer": "We build three kinds of websites: AI-integrated sites, dynamic sites with forms and databases, and simple static sites. Every one is custom-built for your business, not a template."
+  },
+  {
+    "topic": "Web Services Overview",
+    "question": "Do you build websites?",
+    "answer": "Yes, we build custom websites, and we can add AI features in when you're ready for them."
+  },
+  {
+    "topic": "AI Integration for Websites",
+    "question": "How much does it cost to add AI to my website?",
+    "answer": "Adding an AI assistant to your website starts at twelve hundred dollars to set up, then a hundred fifty a month. It answers questions and captures leads for you around the clock."
+  },
+  {
+    "topic": "AI Integration for Websites",
+    "question": "Can you add an AI chatbot to my site?",
+    "answer": "Yes, that starts at twelve hundred dollars to set up, plus a hundred fifty a month, and it works on a new or existing site."
+  },
+  {
+    "topic": "Dynamic Website Design",
+    "question": "How much does a dynamic website cost?",
+    "answer": "A dynamic website with forms and database features starts at two thousand dollars to set up, plus seventy five a month."
+  },
+  {
+    "topic": "Dynamic Website Design",
+    "question": "What if I need forms and a database on my site?",
+    "answer": "That's a Dynamic Website Design, starting at two thousand dollars to set up with seventy five a month for upkeep."
+  },
+  {
+    "topic": "Static Website Design",
+    "question": "How much does a simple website cost?",
+    "answer": "A simple static website starts at just five hundred dollars to set up, with thirty a month for upkeep."
+  },
+  {
+    "topic": "Static Website Design",
+    "question": "What's your cheapest website option?",
+    "answer": "Our most affordable option is a static website, starting at five hundred dollars to set up, thirty a month after that."
+  },
+  {
+    "topic": "Founding Client Offer",
+    "question": "Do you have any discounts right now?",
+    "answer": "Yes, we have a founding client offer right now with discounted setup and monthly pricing, but it's limited to our first five clients."
+  },
+  {
+    "topic": "Founding Client Offer",
+    "question": "Is there a current promotion?",
+    "answer": "There is, a founding client offer with reduced pricing, limited to our first five clients."
+  },
+  {
+    "topic": "AI Business Integration Pricing",
+    "question": "How much does a custom AI system cost?",
+    "answer": "Custom AI business integration starts at five thousand dollars, and we finalize the exact price after we learn your workflows on a discovery call."
+  },
+  {
+    "topic": "AI Business Integration Pricing",
+    "question": "What's the price for AI business integration?",
+    "answer": "It starts at five thousand dollars, with the final number scoped after a discovery call based on complexity and usage."
+  },
+  {
+    "topic": "AI Business Integration Overview",
+    "question": "What is AI business integration?",
+    "answer": "It's where we connect AI into the systems that actually run your business day to day, like scheduling, records, and customer calls, not just your website."
+  },
+  {
+    "topic": "AI Business Integration Overview",
+    "question": "Can AI help run my day to day operations?",
+    "answer": "Yes, that's what AI Business Integration is for, connecting AI into scheduling, records, and customer interactions."
+  },
+  {
+    "topic": "AI Workflow Automation",
+    "question": "Can you automate tasks for my business?",
+    "answer": "Yes, we automate repetitive tasks like data entry, routing, and follow ups, connected right to the tools you already use."
+  },
+  {
+    "topic": "AI Workflow Automation",
+    "question": "What is workflow automation?",
+    "answer": "It's automating the repetitive, multi-step tasks eating up your team's time, connected directly to your existing tools."
+  },
+  {
+    "topic": "RAG Knowledge Assistants",
+    "question": "What is a RAG assistant?",
+    "answer": "A RAG knowledge assistant gives instant, accurate answers pulled straight from your own documents and policies, not a generic chatbot."
+  },
+  {
+    "topic": "RAG Knowledge Assistants",
+    "question": "Can I get an AI that knows my own documents?",
+    "answer": "Yes, that's a RAG knowledge assistant. It answers from your own documents and policies instead of guessing."
+  },
+  {
+    "topic": "AI Customer Service & Voice Receptionists",
+    "question": "Do you build AI receptionists like this one?",
+    "answer": "Yes, this call is actually an example. Our AI voice receptionists handle calls and routine requests around the clock and route anything urgent to your team."
+  },
+  {
+    "topic": "AI Customer Service & Voice Receptionists",
+    "question": "Can AI answer my business calls?",
+    "answer": "Yes, an AI voice receptionist can handle your calls and FAQs around the clock, and send anything urgent straight to your team."
+  },
+  {
+    "topic": "Intelligent Document Processing",
+    "question": "Can AI handle my invoices and paperwork?",
+    "answer": "Yes, our intelligent document processing extracts and routes information from invoices, forms, and contracts automatically, so your team only handles the exceptions."
+  },
+  {
+    "topic": "Intelligent Document Processing",
+    "question": "What is document processing?",
+    "answer": "It's AI that extracts, classifies, and routes information from your invoices, forms, and contracts automatically."
+  },
+  {
+    "topic": "Custom AI Applications",
+    "question": "Can you build a custom AI tool for me?",
+    "answer": "Yes, we build purpose-built AI tools for problems off-the-shelf software can't solve, designed around your exact workflow."
+  },
+  {
+    "topic": "Custom AI Applications",
+    "question": "Do you build custom software?",
+    "answer": "We do, custom AI applications built around your exact workflow instead of a generic package."
+  },
+  {
+    "topic": "Business System Integrations",
+    "question": "Can AI connect to my CRM?",
+    "answer": "Yes, we connect AI directly to the tools you already use, like your CRM, scheduling, or accounting software."
+  },
+  {
+    "topic": "Business System Integrations",
+    "question": "Do you integrate with my existing software?",
+    "answer": "Yes, we connect AI to your existing systems instead of asking you to replace them."
+  },
+  {
+    "topic": "Process - Strategy & Discovery",
+    "question": "How does a project start?",
+    "answer": "Every project starts with a discovery conversation, where we learn your workflows before proposing anything."
+  },
+  {
+    "topic": "Process - Strategy & Discovery",
+    "question": "What's the first step?",
+    "answer": "The first step is strategy and discovery. We learn your workflows and bottlenecks first."
+  },
+  {
+    "topic": "Process - Solution Design",
+    "question": "How do you plan out the project?",
+    "answer": "After discovery, we design a tailored plan for exactly what to automate, integrate, or build."
+  },
+  {
+    "topic": "Process - Solution Design",
+    "question": "What happens after discovery?",
+    "answer": "After discovery, we move into solution design, putting together a tailored plan for what to build and why."
+  },
+  {
+    "topic": "Process - Development",
+    "question": "How do you build the system?",
+    "answer": "We build the system against your real data and software, not a generic template."
+  },
+  {
+    "topic": "Process - Development",
+    "question": "What does the development phase involve?",
+    "answer": "During development, we build the system against your real data and software instead of a generic template."
+  },
+  {
+    "topic": "Process - Testing",
+    "question": "How do you test everything before launch?",
+    "answer": "We test the system against real scenarios and edge cases before it ever touches your workflow."
+  },
+  {
+    "topic": "Process - Testing",
+    "question": "How do you make sure it works before going live?",
+    "answer": "We run it through real scenarios and edge cases during testing, before it ever touches your workflow."
+  },
+  {
+    "topic": "Process - Deployment & Training",
+    "question": "Will my team be trained?",
+    "answer": "Yes, we roll it out carefully and make sure your team is confident using it from day one."
+  },
+  {
+    "topic": "Process - Deployment & Training",
+    "question": "How does the rollout work?",
+    "answer": "During deployment and training, we roll the system out carefully and get your team confident using it."
+  },
+  {
+    "topic": "Process - Ongoing Support",
+    "question": "Do you offer support after launch?",
+    "answer": "Yes, support doesn't stop at launch. We monitor, refine, and support the system as your needs evolve."
+  },
+  {
+    "topic": "Process - Ongoing Support",
+    "question": "What happens after the project is done?",
+    "answer": "After launch, we move into ongoing support. We monitor, refine, and support the solution as your needs evolve."
+  },
+  {
+    "topic": "About / Mission",
+    "question": "What does IntegralAI do?",
+    "answer": "We help small and medium sized businesses build modern websites and practical AI systems that cut down on repetitive work."
+  },
+  {
+    "topic": "About / Mission",
+    "question": "Who do you work with?",
+    "answer": "We work with small and medium sized businesses, building websites and AI systems tailored to how they actually operate."
+  },
+  {
+    "topic": "Tailored not templated",
+    "question": "Is this custom-built or a template?",
+    "answer": "Everything's tailored. We start with your actual workflows, not a pre-built package."
+  },
+  {
+    "topic": "Fits what you already use",
+    "question": "Will I have to replace my current software?",
+    "answer": "No, we integrate with what you already use instead of asking you to replace it."
+  },
+  {
+    "topic": "Support that continues",
+    "question": "Do you help after the project is finished?",
+    "answer": "Yes, we stay involved as your needs evolve. Support doesn't end at launch."
+  },
+  {
+    "topic": "Founders",
+    "question": "Who founded IntegralAI?",
+    "answer": "IntegralAI was founded by Davis Byrd and Collin Harris."
+  },
+  {
+    "topic": "Founders",
+    "question": "Who runs the company?",
+    "answer": "Davis Byrd and Collin Harris founded and run IntegralAI."
+  },
+  {
+    "topic": "Client Projects",
+    "question": "What projects have you done?",
+    "answer": "We recently completed a security audit for a confidential client, and we're currently building a website and AI integration for Page Real Estate."
+  },
+  {
+    "topic": "Client Projects",
+    "question": "Do you have any examples of your work?",
+    "answer": "Yes, a completed security audit for a confidential client, and an in-progress website and AI integration project for Page Real Estate."
+  },
+  {
+    "topic": "Business Hours",
+    "question": "What are your business hours?",
+    "answer": "Our team is reachable Monday through Friday, nine to five Eastern. I'm available any time though, twenty four seven."
+  },
+  {
+    "topic": "Business Hours",
+    "question": "When can I reach a real person?",
+    "answer": "The team is available Monday through Friday, nine to five Eastern. I can help you any time, day or night."
+  },
+  {
+    "topic": "Business Hours",
+    "question": "Are you open right now?",
+    "answer": "I'm available right now, twenty four seven. The human team is reachable Monday through Friday, nine to five Eastern."
+  },
+  {
+    "topic": "Booking",
+    "question": "I'd like to book a consultation.",
+    "answer": "I can get you booked in for a free consultation. What day works best for you?"
+  },
+  {
+    "topic": "Booking",
+    "question": "Can I schedule a call?",
+    "answer": "Sure, I'd be happy to schedule that. What day works best for you?"
+  },
+  {
+    "topic": "Booking",
+    "question": "I want to set up an appointment.",
+    "answer": "Let's get that set up. What day works best for you?"
+  },
+  {
+    "topic": "Leave a Message",
+    "question": "Can I just leave a message?",
+    "answer": "Of course, go ahead and type your message and I'll make sure the team gets it."
+  },
+  {
+    "topic": "Leave a Message",
+    "question": "I'd like to leave a note for the team.",
+    "answer": "Sure, go ahead and type it out and I'll pass it along to the team."
+  }
+]
