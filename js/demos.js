@@ -216,6 +216,13 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     // chain simply stops instead of continuing to speak after being cut off.
     utterance.onerror = () => {};
     window.speechSynthesis.speak(utterance);
+    // Chrome/Edge have a long-standing speechSynthesis bug where the first
+    // word or two of an utterance gets silently clipped, especially right
+    // after cancel() or when the engine has been idle between utterances.
+    // Immediately pausing and resuming forces it to restart playback
+    // properly from the beginning instead of dropping the opening words.
+    window.speechSynthesis.pause();
+    window.speechSynthesis.resume();
   }
 
   function speak(text){
