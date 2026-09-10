@@ -215,21 +215,26 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     // end) on the in-flight utterance in most browsers — swallow it so the
     // chain simply stops instead of continuing to speak after being cut off.
     utterance.onerror = () => {};
-    window.speechSynthesis.speak(utterance);
     // Chrome/Edge have a long-standing speechSynthesis bug where the first
-    // word or two of an utterance gets silently clipped, especially right
-    // after cancel() or when the engine has been idle between utterances.
-    // Immediately pausing and resuming forces it to restart playback
-    // properly from the beginning instead of dropping the opening words.
-    window.speechSynthesis.pause();
-    window.speechSynthesis.resume();
+    // word or two of an utterance gets silently clipped. Pausing and
+    // resuming right as playback actually begins forces the engine to
+    // restart cleanly instead of dropping the opening words.
+    utterance.onstart = () => {
+      window.speechSynthesis.pause();
+      window.speechSynthesis.resume();
+    };
+    window.speechSynthesis.speak(utterance);
   }
 
   function speak(text){
     if (!supportsSpeech || !voiceOn) return;
     window.speechSynthesis.cancel();
     const sentences = splitIntoSentences(text.replace(/&\w+;/g, ' '));
-    speakSentences(sentences, 0);
+    // cancel() is asynchronous internally even though the call returns
+    // immediately — calling speak() again in the same tick races with that
+    // cleanup and is a common cause of the next utterance's opening words
+    // getting dropped. A short delay lets it settle first.
+    setTimeout(() => speakSentences(sentences, 0), 120);
   }
 
   async function botSay(html, { spoken } = {}){
