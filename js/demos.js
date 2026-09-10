@@ -44,26 +44,7 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
   const input = document.getElementById('ragInput');
   const suggestions = document.getElementById('ragSuggestions');
 
-  const TRANSFORMERS_CDN_URL = 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2';
-  const EMBEDDING_MODEL = 'Xenova/all-MiniLM-L6-v2';
   const EMBEDDINGS_URL = 'js/data/rag-embeddings.json';
-
-  // Created lazily on first use and reused for the rest of the session —
-  // not initialized on page load. transformers.js caches the model weights
-  // themselves via the browser Cache API by default; we don't touch that.
-  let embedderPromise = null;
-  function getEmbedder(){
-    if (!embedderPromise){
-      embedderPromise = import(TRANSFORMERS_CDN_URL)
-        .then(({ pipeline, env }) => {
-          // No local model files are hosted on this site — skip the local
-          // lookup so it goes straight to the CDN/Hugging Face fetch.
-          env.allowLocalModels = false;
-          return pipeline('feature-extraction', EMBEDDING_MODEL);
-        });
-    }
-    return embedderPromise;
-  }
 
   let knowledgeBasePromise = null;
   function getKnowledgeBase(){
@@ -73,16 +54,16 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     return knowledgeBasePromise;
   }
 
-  // cosineSimilarity/findBestMatch/matchQuestion/SIMILARITY_THRESHOLD come
-  // from js/rag-match.js (loaded before this script), which keeps the pure
-  // matching logic unit-testable without loading the actual model.
+  // getEmbedder/isEmbedderLoaded/embedText come from js/embedder.js (shared
+  // with the receptionist widget so the model only loads once no matter
+  // which widget is opened first). cosineSimilarity/findBestMatch/
+  // matchQuestion/SIMILARITY_THRESHOLD come from js/rag-match.js, which
+  // keeps the pure matching logic unit-testable without loading the model.
   async function findAnswer(question){
-    const embedder = await getEmbedder();
-    const [output, knowledgeBase] = await Promise.all([
-      embedder(question, { pooling: 'mean', normalize: true }),
+    const [queryEmbedding, knowledgeBase] = await Promise.all([
+      embedText(question),
       getKnowledgeBase()
     ]);
-    const queryEmbedding = Array.from(output.data);
     return matchQuestion(queryEmbedding, knowledgeBase);
   }
 
@@ -90,7 +71,7 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     appendMessage(chatWindow, { from: 'user', avatar: 'You', html: escapeHtml(question) });
     suggestions.querySelectorAll('.chip').forEach(c => c.disabled = true);
 
-    const isFirstLoad = !embedderPromise;
+    const isFirstLoad = !isEmbedderLoaded();
     const statusEl = appendTyping(chatWindow, 'AI');
     if (isFirstLoad){
       statusEl.querySelector('.chat-bubble').innerHTML = 'Loading the on-device matching model (first question only)…';
@@ -144,6 +125,7 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
   let voiceOn = supportsSpeech;
   let awaitingFreeText = false;
   let freeTextResolver = null;
+  let callConnected = false;
 
   if (!supportsSpeech){
     speechToggle.disabled = true;
@@ -257,6 +239,60 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     });
   }
 
+  const RECEPTIONIST_EMBEDDINGS_URL = 'js/data/receptionist-embeddings.json';
+  let receptionistKnowledgeBasePromise = null;
+  function getReceptionistKnowledgeBase(){
+    if (!receptionistKnowledgeBasePromise){
+      receptionistKnowledgeBasePromise = fetch(RECEPTIONIST_EMBEDDINGS_URL).then(res => res.json());
+    }
+    return receptionistKnowledgeBasePromise;
+  }
+
+  // Topics whose matched question should drive the existing call flow
+  // instead of just being spoken as static text.
+  const TOPIC_ACTIONS = {
+    'Booking': bookingFlow,
+    'Business Hours': businessHours,
+    'Leave a Message': leaveMessage
+  };
+
+  // getEmbedder/isEmbedderLoaded/embedText come from js/embedder.js, shared
+  // with the RAG widget so the model only downloads once regardless of
+  // which widget is opened first. cosineSimilarity/findBestMatch/
+  // matchQuestion/SIMILARITY_THRESHOLD/OUT_OF_SCOPE_ANSWER come from
+  // js/rag-match.js — same threshold and out-of-scope behavior as the RAG
+  // assistant.
+  async function handleCallerQuestion(question){
+    let loadingEl = null;
+    if (!isEmbedderLoaded()){
+      loadingEl = appendTyping(chatWindow, ICON_PHONE);
+      loadingEl.querySelector('.chat-bubble').innerHTML = 'Loading the on-device matching model (first question only)…';
+    }
+
+    const [queryEmbedding, knowledgeBase] = await Promise.all([
+      embedText(question),
+      getReceptionistKnowledgeBase()
+    ]);
+    const { answer, source } = matchQuestion(queryEmbedding, knowledgeBase);
+
+    if (loadingEl) loadingEl.remove();
+
+    const action = TOPIC_ACTIONS[source];
+    if (action){
+      setOptions([]);
+      action();
+      return;
+    }
+
+    if (source){
+      await botSay(answer);
+      afterAnswer();
+    } else {
+      await botSay(OUT_OF_SCOPE_ANSWER);
+      bookingFlow();
+    }
+  }
+
   function endInteraction(){
     botSay('Thanks for calling IntegralAI — have a great day!').then(() => {
       setTimeout(endCall, 900);
@@ -267,6 +303,7 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     chatWindow.innerHTML = '';
     optionsWrap.innerHTML = '';
     awaitingFreeText = false;
+    callConnected = true;
     startBtn.disabled = true;
     endBtn.disabled = false;
     callDot.classList.add('live');
@@ -278,6 +315,7 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     window.speechSynthesis && window.speechSynthesis.cancel();
     optionsWrap.innerHTML = '';
     awaitingFreeText = false;
+    callConnected = false;
     startBtn.disabled = false;
     endBtn.disabled = true;
     callDot.classList.remove('live');
@@ -288,6 +326,19 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
   startBtn.addEventListener('click', startCall);
   endBtn.addEventListener('click', endCall);
 
+  // Caller can type a question at any point during an active call, matched
+  // semantically instead of needing to click a menu button for it.
+  const askForm = document.createElement('form');
+  askForm.className = 'chat-input-row';
+  askForm.style.display = 'none';
+  askForm.innerHTML = `
+    <label class="sr-only" for="receptionistAskInput">Ask a question</label>
+    <input type="text" id="receptionistAskInput" placeholder="Or type a question…" autocomplete="off">
+    <button type="submit" class="btn btn-primary btn-sm">Ask</button>
+  `;
+  optionsWrap.insertAdjacentElement('afterend', askForm);
+  const askInput = askForm.querySelector('input');
+
   // Free-text input reuses the RAG demo's input pattern via a lightweight inline form
   const freeTextForm = document.createElement('form');
   freeTextForm.className = 'chat-input-row';
@@ -297,16 +348,16 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     <input type="text" id="receptionistInput" placeholder="Type your message…" autocomplete="off">
     <button type="submit" class="btn btn-primary btn-sm">Send</button>
   `;
-  optionsWrap.insertAdjacentElement('afterend', freeTextForm);
+  askForm.insertAdjacentElement('afterend', freeTextForm);
   const freeTextInput = freeTextForm.querySelector('input');
 
-  function toggleFreeTextVisibility(){
+  function toggleInputVisibility(){
     freeTextForm.style.display = awaitingFreeText ? 'flex' : 'none';
+    askForm.style.display = (callConnected && !awaitingFreeText) ? 'flex' : 'none';
   }
 
-  const originalLeaveMessage = leaveMessage;
-  // Wrap leaveMessage to also reveal the free-text input
-  window.setInterval(toggleFreeTextVisibility, 200);
+  // Toggle both input rows based on call/free-text state
+  window.setInterval(toggleInputVisibility, 200);
 
   freeTextForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -316,5 +367,15 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     userSay(value);
     awaitingFreeText = false;
     botSay('Got it — I’ve logged your message for the team. Anything else I can help with?').then(afterAnswer);
+  });
+
+  askForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const value = askInput.value.trim();
+    if (!value || !callConnected || awaitingFreeText) return;
+    askInput.value = '';
+    userSay(value);
+    setOptions([]);
+    handleCallerQuestion(value);
   });
 })();
