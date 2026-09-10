@@ -144,7 +144,6 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
   // different voice ends up sounding better at different values.
   const SPEECH_RATE = 0.97;
   const SPEECH_PITCH = 1.03;
-  const SENTENCE_PAUSE_MS = 180;
 
   let selectedVoice = null;
 
@@ -188,19 +187,10 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     window.speechSynthesis.addEventListener('voiceschanged', refreshVoice);
   }
 
-  // Splits on sentence-ending punctuation followed by whitespace/end of
-  // string, so long answers speak as separate utterances with a natural
-  // pause between them instead of one flat run-on line.
-  function splitIntoSentences(text){
-    const sentences = text.match(/[^.!?]+[.!?]+(\s|$)/g);
-    if (sentences && sentences.length) return sentences.map(s => s.trim()).filter(Boolean);
-    const trimmed = text.trim();
-    return trimmed ? [trimmed] : [];
-  }
-
-  function speakSentences(sentences, index){
-    if (index >= sentences.length) return;
-    const utterance = new SpeechSynthesisUtterance(sentences[index]);
+  function speak(text){
+    if (!supportsSpeech || !voiceOn) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text.replace(/&\w+;/g, ' '));
     if (selectedVoice) utterance.voice = selectedVoice;
     // Natural/Neural voices already have well-tuned prosody — forcing our
     // rate/pitch tweak onto them tends to make them sound worse, not better,
@@ -208,33 +198,7 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     const useTunedProsody = !isNaturalVoice(selectedVoice);
     utterance.rate = useTunedProsody ? SPEECH_RATE : 1.0;
     utterance.pitch = useTunedProsody ? SPEECH_PITCH : 1.0;
-    utterance.onend = () => {
-      setTimeout(() => speakSentences(sentences, index + 1), SENTENCE_PAUSE_MS);
-    };
-    // Interrupting speak() calls cancel() first, which fires an error (not
-    // end) on the in-flight utterance in most browsers — swallow it so the
-    // chain simply stops instead of continuing to speak after being cut off.
-    utterance.onerror = () => {};
-    // Chrome/Edge have a long-standing speechSynthesis bug where the first
-    // word or two of an utterance gets silently clipped. Pausing and
-    // resuming right as playback actually begins forces the engine to
-    // restart cleanly instead of dropping the opening words.
-    utterance.onstart = () => {
-      window.speechSynthesis.pause();
-      window.speechSynthesis.resume();
-    };
     window.speechSynthesis.speak(utterance);
-  }
-
-  function speak(text){
-    if (!supportsSpeech || !voiceOn) return;
-    window.speechSynthesis.cancel();
-    const sentences = splitIntoSentences(text.replace(/&\w+;/g, ' '));
-    // cancel() is asynchronous internally even though the call returns
-    // immediately — calling speak() again in the same tick races with that
-    // cleanup and is a common cause of the next utterance's opening words
-    // getting dropped. A short delay lets it settle first.
-    setTimeout(() => speakSentences(sentences, 0), 120);
   }
 
   async function botSay(html, { spoken } = {}){
