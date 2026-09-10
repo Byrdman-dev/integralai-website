@@ -1,0 +1,252 @@
+[
+  {
+    "topic": "Web Services Overview",
+    "question": "What web services do you offer?",
+    "answer": "We offer three Web & AI Website Services: AI Integration for Websites, Dynamic Website Design, and Static Website Design. Every site we build follows the same disciplined, custom-first philosophy we bring to AI integration, built from the ground up around your specific needs, not assembled from a template."
+  },
+  {
+    "topic": "Web Services Overview",
+    "question": "What kind of websites do you build?",
+    "answer": "A modern website, with AI built in when you're ready for it. Every site we build is built from the ground up around your specific needs, not assembled from a template, giving you a foundation that's reliable, fully customizable, and ready to grow into deeper AI systems as your business needs them."
+  },
+  {
+    "topic": "AI Integration for Websites",
+    "question": "How much does it cost to add an AI assistant to my website?",
+    "answer": "AI Integration for Websites starts at $1,200 setup with $150/mo ongoing management. It adds a smart AI assistant to your site, whether new or existing, that answers questions and captures leads around the clock."
+  },
+  {
+    "topic": "AI Integration for Websites",
+    "question": "Can you add a chatbot to my existing site?",
+    "answer": "Yes — AI Integration for Websites adds a smart AI assistant to your site, whether new or existing, that answers questions and captures leads around the clock. Setup starts at $1,200 with $150/mo ongoing management."
+  },
+  {
+    "topic": "AI Integration for Websites",
+    "question": "What does an AI assistant on my website do?",
+    "answer": "It answers questions and captures leads around the clock, whether added to a new or existing site. Setup starts at $1,200 with $150/mo ongoing management."
+  },
+  {
+    "topic": "Dynamic Website Design",
+    "question": "How much does a dynamic website cost?",
+    "answer": "Dynamic Website Design starts at $2,000 setup with $75/mo ongoing management. It covers dynamic content, forms, and database-backed features. If you need a full client portal or custom app, that falls under AI Business Integration instead."
+  },
+  {
+    "topic": "Dynamic Website Design",
+    "question": "Do you build websites with forms and databases?",
+    "answer": "Yes — Dynamic Website Design covers dynamic content, forms, and database-backed features, starting at $2,000 setup with $75/mo ongoing management. For a full client portal or custom app, see AI Business Integration."
+  },
+  {
+    "topic": "Static Website Design",
+    "question": "How much does a simple website cost?",
+    "answer": "Static Website Design starts at $500 setup with $30/mo ongoing management. It's a clean, professional site with fixed pages, no backend, no database, ideal for a straightforward online presence that's fast, reliable, and easy to maintain."
+  },
+  {
+    "topic": "Static Website Design",
+    "question": "What's the price for a basic website?",
+    "answer": "A basic Static Website Design starts at $500 setup with $30/mo ongoing management: a clean, professional site with fixed pages, no backend, no database, built to be fast, reliable, and easy to maintain."
+  },
+  {
+    "topic": "Founding Client Offer",
+    "question": "Do you have any current promotions or discounts?",
+    "answer": "Yes — there's a Founding Client Offer, limited to our first 5 clients across the three Web & AI Website Services combined. AI Integration for Websites is discounted to $720 setup and $75/mo for the first 5 months (then $150/mo). Dynamic Website Design is discounted to $1,000 setup. Static Website Design is discounted to $300 setup and $15/mo for the first 5 months (then $30/mo)."
+  },
+  {
+    "topic": "Founding Client Offer",
+    "question": "What is the founding client offer?",
+    "answer": "The Founding Client Offer is limited to our first 5 clients across our three Web & AI Website Services combined, with discounted setup and monthly pricing on AI Integration for Websites, Dynamic Website Design, and Static Website Design."
+  },
+  {
+    "topic": "AI Business Integration Pricing",
+    "question": "How much does AI business integration cost?",
+    "answer": "AI Business Integration starts at $5,000 setup. We learn your workflows first, then scope and finalize pricing after discovery, based on your project's complexity and usage. Ongoing management is $300/mo, scaled to system usage. Case study opportunities are available for select engagements — ask during your discovery call."
+  },
+  {
+    "topic": "AI Business Integration Pricing",
+    "question": "What's the pricing for custom AI systems?",
+    "answer": "Custom AI systems under AI Business Integration start at $5,000 setup, with final pricing scoped after a discovery call based on complexity and usage, plus $300/mo ongoing management scaled to usage."
+  },
+  {
+    "topic": "AI Business Integration Overview",
+    "question": "What is AI business integration?",
+    "answer": "AI Business Integration is where AI moves beyond your website and into the systems that actually run your day-to-day: scheduling, records, follow-ups, calls with customers, and more. Because these systems touch real business data and real interactions, every one we build is tested against real-world scenarios before it ever goes live, and designed to hold up reliably as your business grows, not just perform well in a demo."
+  },
+  {
+    "topic": "AI Workflow Automation",
+    "question": "What is AI workflow automation?",
+    "answer": "AI Workflow Automation automates the repetitive, multi-step tasks eating your team's time, like data entry, routing, follow-ups, and reporting, connected directly to the tools you already use."
+  },
+  {
+    "topic": "AI Workflow Automation",
+    "question": "Can you automate repetitive tasks for my business?",
+    "answer": "Yes — AI Workflow Automation automates repetitive, multi-step tasks like data entry, routing, follow-ups, and reporting, connected directly to the tools you already use."
+  },
+  {
+    "topic": "RAG Knowledge Assistants",
+    "question": "What is a RAG knowledge assistant?",
+    "answer": "RAG Knowledge Assistants give your team and customers instant, accurate answers pulled straight from your own documents, policies, and knowledge base, not a generic chatbot."
+  },
+  {
+    "topic": "RAG Knowledge Assistants",
+    "question": "What does RAG stand for?",
+    "answer": "RAG stands for Retrieval-Augmented Generation — an AI pattern where a system retrieves relevant information from your own documents, then uses that context to generate accurate, grounded answers instead of relying on a general model's memory alone."
+  },
+  {
+    "topic": "RAG Knowledge Assistants",
+    "question": "Can I get an AI that answers questions from my own documents?",
+    "answer": "Yes — that's what a RAG Knowledge Assistant does: it gives your team and customers instant, accurate answers pulled straight from your own documents, policies, and knowledge base, not a generic chatbot."
+  },
+  {
+    "topic": "AI Customer Service & Voice Receptionists",
+    "question": "Do you offer AI phone receptionists?",
+    "answer": "Yes — AI Customer Service & Voice Receptionists handle calls, FAQs, and routine requests automatically around the clock, while routing anything that needs a human straight to your team."
+  },
+  {
+    "topic": "AI Customer Service & Voice Receptionists",
+    "question": "Can AI handle my customer service calls?",
+    "answer": "AI Customer Service & Voice Receptionists handle calls, FAQs, and routine requests automatically around the clock, and route anything that needs a human straight to your team."
+  },
+  {
+    "topic": "Intelligent Document Processing",
+    "question": "Can AI process invoices and contracts for me?",
+    "answer": "Intelligent Document Processing extracts, classifies, and routes information from invoices, forms, and contracts automatically, cutting manual review down to the exceptions that need it."
+  },
+  {
+    "topic": "Intelligent Document Processing",
+    "question": "What is intelligent document processing?",
+    "answer": "It's a service that extracts, classifies, and routes information from invoices, forms, and contracts automatically, cutting manual review down to just the exceptions that need it."
+  },
+  {
+    "topic": "Custom AI Applications",
+    "question": "Can you build a custom AI tool for my business?",
+    "answer": "Yes — Custom AI Applications are purpose-built tools for problems generic software doesn't solve, designed around your exact workflow, not the other way around."
+  },
+  {
+    "topic": "Business System Integrations",
+    "question": "Can AI integrate with my CRM?",
+    "answer": "Yes — Business System Integrations connect AI seamlessly to your existing CRM, scheduling, accounting, or internal tools so it fits into how your business already runs."
+  },
+  {
+    "topic": "Business System Integrations",
+    "question": "Do you connect AI to the software I already use?",
+    "answer": "Business System Integrations connect AI seamlessly to your existing CRM, scheduling, accounting, or internal tools, so it fits into how your business already runs instead of replacing it."
+  },
+  {
+    "topic": "Process Step 1 - Strategy & Discovery",
+    "question": "How does a project start?",
+    "answer": "Every project starts with Strategy & Discovery: we learn your workflows, tools, and bottlenecks before proposing a single line of code."
+  },
+  {
+    "topic": "Process Step 1 - Strategy & Discovery",
+    "question": "What's the first step when working with you?",
+    "answer": "The first step is Strategy & Discovery — we learn your workflows, tools, and bottlenecks before proposing a single line of code."
+  },
+  {
+    "topic": "Process Step 2 - Solution Design",
+    "question": "How do you design a solution for my business?",
+    "answer": "After discovery, we move to Solution Design: a tailored plan for exactly what to automate, integrate, or build, and why."
+  },
+  {
+    "topic": "Process Step 3 - Development",
+    "question": "How do you build the system?",
+    "answer": "During Development, we build the system against your real data and software, not a generic template."
+  },
+  {
+    "topic": "Process Step 4 - Testing",
+    "question": "How do you test before launch?",
+    "answer": "During Testing, we verify the system against real scenarios and edge cases before it ever touches your workflow."
+  },
+  {
+    "topic": "Process Step 5 - Deployment & Training",
+    "question": "How do you handle deployment and training?",
+    "answer": "During Deployment & Training, we roll the system out carefully and make sure your team is confident using it day one."
+  },
+  {
+    "topic": "Process Step 6 - Ongoing Support",
+    "question": "What happens after launch?",
+    "answer": "After launch, we move into Ongoing Support: AI systems need upkeep, so we monitor, refine, and support the solution as your needs evolve."
+  },
+  {
+    "topic": "Process Step 6 - Ongoing Support",
+    "question": "Do you offer ongoing support after deployment?",
+    "answer": "Yes — Ongoing Support is the final step in our process. AI systems need upkeep, and we monitor, refine, and support every solution after launch as your needs evolve."
+  },
+  {
+    "topic": "About / Mission",
+    "question": "What does IntegralAI do?",
+    "answer": "IntegralAI helps small and medium-sized businesses build modern websites and identify, design, and integrate practical AI solutions that improve efficiency, reduce repetitive work, and streamline everyday operations."
+  },
+  {
+    "topic": "About / Mission",
+    "question": "Do you work with small businesses?",
+    "answer": "Yes — IntegralAI helps small and medium-sized businesses build modern websites and identify, design, and integrate practical AI solutions that improve efficiency, reduce repetitive work, and streamline everyday operations."
+  },
+  {
+    "topic": "About / Mission",
+    "question": "What makes your approach different?",
+    "answer": "Rather than offering one-size-fits-all AI products, we take the time to understand each client's unique workflows and challenges, then develop tailored AI systems that integrate seamlessly with their existing software and business processes."
+  },
+  {
+    "topic": "Tailored not templated",
+    "question": "Do you use templates or pre-built solutions?",
+    "answer": "No — every engagement starts with your actual workflows, not a pre-built package. That's one of our core values: tailored, not templated."
+  },
+  {
+    "topic": "Fits what you already use",
+    "question": "Will I have to replace my current software?",
+    "answer": "No — we integrate with your existing systems instead of asking you to replace them. That's one of our core values: it fits what you already use."
+  },
+  {
+    "topic": "Support that continues",
+    "question": "What kind of support do you provide after deployment?",
+    "answer": "Deployment isn't the finish line. We stay involved as your needs evolve — support that continues is one of our core values."
+  },
+  {
+    "topic": "Founders",
+    "question": "Who founded IntegralAI?",
+    "answer": "IntegralAI was founded by Davis Byrd, CTO, and Collin Harris, CFO."
+  },
+  {
+    "topic": "Founders",
+    "question": "Who are the founders?",
+    "answer": "The founders are Davis Byrd (CTO) and Collin Harris (CFO)."
+  },
+  {
+    "topic": "Client Projects",
+    "question": "What projects have you completed?",
+    "answer": "We completed a security audit for a client's website and hosting platform (Security Audit: Confidential Client). We're also currently working on Website & AI Integration for Page Real Estate — a full website redesign is completed, and we're currently integrating an AI chatbot for lead capture and customer inquiries."
+  },
+  {
+    "topic": "Client Projects",
+    "question": "Do you have any case studies or examples of your work?",
+    "answer": "Yes — a completed Security Audit for a confidential client's website and hosting platform, and an in-progress Website & AI Integration project for Page Real Estate, where the full website redesign is done and we're currently integrating an AI chatbot for lead capture and customer inquiries."
+  },
+  {
+    "topic": "Demos",
+    "question": "Are these demos real AI or simulated?",
+    "answer": "The demos on this site run entirely in your browser, simulated so they're fast, free, and safe to click around in. No account, no API keys, nothing sent anywhere. In a real engagement, these are connected to your actual knowledge base and phone system."
+  },
+  {
+    "topic": "Demos",
+    "question": "Is my data safe when I use these demos?",
+    "answer": "Yes — the demos run entirely in your browser. No account, no API keys, and nothing is sent anywhere."
+  },
+  {
+    "topic": "Demos",
+    "question": "What is a RAG assistant?",
+    "answer": "RAG stands for Retrieval-Augmented Generation — an AI pattern where a system retrieves relevant information from your own documents, then uses that context to generate accurate, grounded answers instead of relying on a general model's memory alone. This chat is an example of that retrieval pattern."
+  },
+  {
+    "topic": "Contact",
+    "question": "How can I contact you?",
+    "answer": "You can reach IntegralAI through the contact form on this site. Describe what's slowing your team down and we'll follow up with a discovery call to discuss practical ideas along with recommended proposals and next steps."
+  },
+  {
+    "topic": "Contact",
+    "question": "How do I get in touch?",
+    "answer": "Fill out the contact form telling us about your business and what can we help with, and we'll follow up with a discovery call to discuss practical ideas along with recommended proposals and next steps."
+  },
+  {
+    "topic": "Contact",
+    "question": "What does the initial consultation process look like?",
+    "answer": "Depending on your project's complexity and your availability, this typically starts with an initial call to understand your goals, followed by a more in-depth consultation, in person or by video, to work through the details. We'll shape this process around what makes sense for your situation."
+  }
+]
