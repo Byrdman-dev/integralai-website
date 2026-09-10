@@ -1,0 +1,12 @@
+{
+  "name": "integralai-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static site for getintegralai.com. Dev-only tooling for testing pure JS logic (e.g. the RAG demo's matching function) — the site itself ships with no build step.",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

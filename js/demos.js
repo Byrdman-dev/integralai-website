@@ -44,12 +44,6 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
   const input = document.getElementById('ragInput');
   const suggestions = document.getElementById('ragSuggestions');
 
-  // Similarity is a cosine score in [-1, 1] between the visitor's question
-  // embedding and a knowledge-base entry's precomputed embedding. Below this,
-  // the question is treated as out of scope. Tune here if matches feel too
-  // loose or too strict.
-  const SIMILARITY_THRESHOLD = 0.5;
-
   const TRANSFORMERS_CDN_URL = 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2';
   const EMBEDDING_MODEL = 'Xenova/all-MiniLM-L6-v2';
   const EMBEDDINGS_URL = 'js/data/rag-embeddings.json';
@@ -74,25 +68,9 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
     return knowledgeBasePromise;
   }
 
-  // Embeddings on both sides are unit-normalized (see scripts/embed_qa.py and
-  // the { normalize: true } pipeline option below), so cosine similarity is
-  // just the dot product — no magnitude division needed.
-  function cosineSimilarity(a, b){
-    let dot = 0;
-    for (let i = 0; i < a.length; i++) dot += a[i] * b[i];
-    return dot;
-  }
-
-  function findBestMatch(queryEmbedding, knowledgeBase){
-    let best = null;
-    let bestScore = -Infinity;
-    knowledgeBase.forEach(entry => {
-      const score = cosineSimilarity(queryEmbedding, entry.embedding);
-      if (score > bestScore){ bestScore = score; best = entry; }
-    });
-    return { best, bestScore };
-  }
-
+  // cosineSimilarity/findBestMatch/matchQuestion/SIMILARITY_THRESHOLD come
+  // from js/rag-match.js (loaded before this script), which keeps the pure
+  // matching logic unit-testable without loading the actual model.
   async function findAnswer(question){
     const embedder = await getEmbedder();
     const [output, knowledgeBase] = await Promise.all([
@@ -100,12 +78,7 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
       getKnowledgeBase()
     ]);
     const queryEmbedding = Array.from(output.data);
-
-    const { best, bestScore } = findBestMatch(queryEmbedding, knowledgeBase);
-    if (best && bestScore >= SIMILARITY_THRESHOLD){
-      return { answer: best.answer, source: best.topic };
-    }
-    return { answer: 'That inquiry is outside my scope.', source: null };
+    return matchQuestion(queryEmbedding, knowledgeBase);
   }
 
   async function handleQuestion(question){
