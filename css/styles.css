@@ -181,6 +181,7 @@ button{ font-family: inherit; cursor: pointer; }
 .section h2{ max-width: 620px; }
 .section-lede{ max-width: 620px; font-size:1.05rem; }
 .section-lede-wide{ max-width: 900px; }
+.demo-disclaimer{ max-width: 620px; font-size:.85rem; color: var(--text-tertiary); font-style: italic; margin-top:-.5rem; }
 
 .grid{ display:grid; gap:1.5rem; margin-top:2.5rem; }
 .services-grid{ grid-template-columns: repeat(auto-fit, minmax(340px,1fr)); }
