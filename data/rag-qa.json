@@ -70,6 +70,11 @@
     "answer": "AI Business Integration is where AI moves beyond your website and into the systems that actually run your day-to-day: scheduling, records, follow-ups, calls with customers, and more. Because these systems touch real business data and real interactions, every one we build is tested against real-world scenarios before it ever goes live, and designed to hold up reliably as your business grows, not just perform well in a demo."
   },
   {
+    "topic": "AI Business Integration Overview",
+    "question": "What does an AI business integration project actually involve?",
+    "answer": "It's where AI moves beyond your website and into the systems that run your day-to-day: scheduling, records, follow-ups, calls with customers, and more. Because these systems touch real business data and real interactions, every one we build is tested against real-world scenarios before it ever goes live, and designed to hold up reliably as your business grows, not just perform well in a demo."
+  },
+  {
     "topic": "AI Workflow Automation",
     "question": "What is AI workflow automation?",
     "answer": "AI Workflow Automation automates the repetitive, multi-step tasks eating your team's time, like data entry, routing, follow-ups, and reporting, connected directly to the tools you already use."
@@ -145,9 +150,19 @@
     "answer": "After discovery, we move to Solution Design: a tailored plan for exactly what to automate, integrate, or build, and why."
   },
   {
+    "topic": "Process Step 2 - Solution Design",
+    "question": "What happens during the solution design phase?",
+    "answer": "During the Solution Design phase, we put together a tailored plan for exactly what to automate, integrate, or build, and why."
+  },
+  {
     "topic": "Process Step 3 - Development",
     "question": "How do you build the system?",
     "answer": "During Development, we build the system against your real data and software, not a generic template."
+  },
+  {
+    "topic": "Process Step 3 - Development",
+    "question": "What does the development phase involve?",
+    "answer": "During the Development phase, we build the system against your real data and software, not a generic template."
   },
   {
     "topic": "Process Step 4 - Testing",
@@ -155,9 +170,19 @@
     "answer": "During Testing, we verify the system against real scenarios and edge cases before it ever touches your workflow."
   },
   {
+    "topic": "Process Step 4 - Testing",
+    "question": "How do you make sure everything works before it goes live?",
+    "answer": "During the Testing phase, we verify the system against real scenarios and edge cases before it ever touches your workflow."
+  },
+  {
     "topic": "Process Step 5 - Deployment & Training",
     "question": "How do you handle deployment and training?",
     "answer": "During Deployment & Training, we roll the system out carefully and make sure your team is confident using it day one."
+  },
+  {
+    "topic": "Process Step 5 - Deployment & Training",
+    "question": "Will my team be trained on the new system?",
+    "answer": "Yes — during Deployment & Training, we roll the system out carefully and make sure your team is confident using it day one."
   },
   {
     "topic": "Process Step 6 - Ongoing Support",
@@ -190,14 +215,29 @@
     "answer": "No — every engagement starts with your actual workflows, not a pre-built package. That's one of our core values: tailored, not templated."
   },
   {
+    "topic": "Tailored not templated",
+    "question": "Is this a pre-built package or custom-built for us?",
+    "answer": "It's custom-built for you — every engagement starts with your actual workflows, not a pre-built package. That's one of our core values: tailored, not templated."
+  },
+  {
     "topic": "Fits what you already use",
     "question": "Will I have to replace my current software?",
     "answer": "No — we integrate with your existing systems instead of asking you to replace them. That's one of our core values: it fits what you already use."
   },
   {
+    "topic": "Fits what you already use",
+    "question": "Does this work alongside the tools I already have?",
+    "answer": "Yes — we integrate with your existing systems instead of asking you to replace them. That's one of our core values: it fits what you already use."
+  },
+  {
     "topic": "Support that continues",
     "question": "What kind of support do you provide after deployment?",
     "answer": "Deployment isn't the finish line. We stay involved as your needs evolve — support that continues is one of our core values."
+  },
+  {
+    "topic": "Support that continues",
+    "question": "Do you disappear once the project launches?",
+    "answer": "No — deployment isn't the finish line. We stay involved as your needs evolve. Support that continues is one of our core values."
   },
   {
     "topic": "Founders",

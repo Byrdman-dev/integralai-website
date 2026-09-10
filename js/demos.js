@@ -55,7 +55,12 @@ function wait(ms){ return new Promise(resolve => setTimeout(resolve, ms)); }
   function getEmbedder(){
     if (!embedderPromise){
       embedderPromise = import(TRANSFORMERS_CDN_URL)
-        .then(({ pipeline }) => pipeline('feature-extraction', EMBEDDING_MODEL));
+        .then(({ pipeline, env }) => {
+          // No local model files are hosted on this site — skip the local
+          // lookup so it goes straight to the CDN/Hugging Face fetch.
+          env.allowLocalModels = false;
+          return pipeline('feature-extraction', EMBEDDING_MODEL);
+        });
     }
     return embedderPromise;
   }
