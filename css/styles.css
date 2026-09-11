@@ -149,7 +149,7 @@ button{ font-family: inherit; cursor: pointer; }
 }
 .hero-inner{ text-align:center; max-width: 860px; }
 .location-bar{
-  display:block; font-size:1rem; font-weight:500; letter-spacing:.03em;
+  display:block; font-size:1.2rem; font-weight:500; letter-spacing:.03em;
   color: var(--text-secondary); margin-bottom:.6rem;
 }
 .eyebrow{
