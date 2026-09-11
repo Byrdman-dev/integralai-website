@@ -78,6 +78,17 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 /* ===================== Header ===================== */
+.location-bar{
+  text-align:center;
+  font-size:.78rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  padding:.45rem 1rem;
+}
+
 .site-header{
   position: sticky; top:0; z-index: 100;
   border-bottom: 1px solid transparent;
