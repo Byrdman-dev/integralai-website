@@ -78,17 +78,6 @@ button{ font-family: inherit; cursor: pointer; }
 }
 
 /* ===================== Header ===================== */
-.location-bar{
-  text-align:center;
-  font-size:.78rem;
-  font-weight:500;
-  letter-spacing:.02em;
-  color: var(--text-secondary);
-  background: var(--bg-elevated);
-  border-bottom: 1px solid var(--border);
-  padding:.45rem 1rem;
-}
-
 .site-header{
   position: sticky; top:0; z-index: 100;
   border-bottom: 1px solid transparent;
@@ -159,6 +148,10 @@ button{ font-family: inherit; cursor: pointer; }
   100%{ transform: translateX(-46%) translateY(30px) scale(1.06); }
 }
 .hero-inner{ text-align:center; max-width: 860px; }
+.location-bar{
+  display:block; font-size:.8rem; font-weight:500; letter-spacing:.03em;
+  color: var(--text-secondary); margin-bottom:.6rem;
+}
 .eyebrow{
   display:inline-block; text-transform:uppercase; letter-spacing:.14em; font-size:.85rem; font-weight:700;
   color: var(--cyan); margin-bottom:1rem;
